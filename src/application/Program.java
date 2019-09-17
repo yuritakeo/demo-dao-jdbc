@@ -1,6 +1,11 @@
 package application;
 
+import java.text.ParseException;
+import java.sql.Date;
+import java.text.SimpleDateFormat;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import model.dao.DaoFactory;
 import model.dao.SellerDao;
 import model.entitis.Department;
@@ -23,10 +28,26 @@ public class Program {
             System.out.println(obj);
         }
 
-        System.out.println("\n=== TESTE 2: seller findByDepartment ===");
+        System.out.println("\n=== TESTE 2: seller findByAll===");
         sellers = sellerDao.findAll();
         for (Seller obj : sellers) {
             System.out.println(obj);
         }
+
+        System.out.println("\n=== TESTE 2: seller insert ===");
+        try {
+            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+            Seller newSeller = new Seller();
+            newSeller.setName("hahaha");
+            newSeller.setBirthDate(new Date(sdf.parse("26/08/1992").getTime()));
+            newSeller.setBaseSalary(1800.00);
+            newSeller.setDepartment(department);
+            newSeller.setEmail("hahaha@gmail.com");
+            sellerDao.insert(newSeller);
+            System.out.println("Seller id: " + newSeller.getId() + " Ok");
+        } catch (ParseException ex) {
+            Logger.getLogger(Program.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
     }
 }
