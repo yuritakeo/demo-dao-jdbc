@@ -53,5 +53,8 @@ public class Program {
         sellerDao.update(updateSeller);
         System.out.println("Alterado com sussesso!");
 
+        System.out.println("\n=== TESTE 5: seller update ===");
+        sellerDao.deleteById(9);
+        System.out.println("User deleted");
     }
 }
