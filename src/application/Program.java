@@ -4,8 +4,6 @@ import java.text.ParseException;
 import java.sql.Date;
 import java.text.SimpleDateFormat;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import model.dao.DaoFactory;
 import model.dao.SellerDao;
 import model.entitis.Department;
@@ -28,13 +26,13 @@ public class Program {
             System.out.println(obj);
         }
 
-        System.out.println("\n=== TESTE 2: seller findByAll===");
+        System.out.println("\n=== TESTE 3: seller findByAll===");
         sellers = sellerDao.findAll();
         for (Seller obj : sellers) {
             System.out.println(obj);
         }
 
-        System.out.println("\n=== TESTE 2: seller insert ===");
+        System.out.println("\n=== TESTE 4: seller insert ===");
         try {
             SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
             Seller newSeller = new Seller();
@@ -45,9 +43,15 @@ public class Program {
             newSeller.setEmail("hahaha@gmail.com");
             sellerDao.insert(newSeller);
             System.out.println("Seller id: " + newSeller.getId() + " Ok");
-        } catch (ParseException ex) {
-            Logger.getLogger(Program.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ParseException e) {
+            System.out.println("Error --> " + e.getMessage());
         }
+
+        System.out.println("\n=== TESTE 5: seller update ===");
+        Seller updateSeller = sellerDao.findById(9);
+        updateSeller.setName("Yu Yu");
+        sellerDao.update(updateSeller);
+        System.out.println("Alterado com sussesso!");
 
     }
 }
